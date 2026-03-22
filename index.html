@@ -20,7 +20,7 @@
 
   <meta name="keywords" content="Video-to-Video, Diffusion Models, Memory, Novel View Synthesis, Video Editing">
 
-  <title>Memory-V2V: Augmenting Video-to-Video Diffusion Models with Memory</title>
+  <title>Memory-V2V: Memory-Augmented Video-to-Video Diffusion for Consistent Multi-Turn Editing</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,6 +80,12 @@
       padding: 0 4%;
     }
 
+    .image-full {
+      width: 100%;
+      display: block;
+      margin-top: 10px; /* video와 간격 */
+    }
+    
     section {
       padding: 80px 0;
     }
@@ -266,6 +272,22 @@
       }
     }
 
+    .video-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 1024px) {
+      .video-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .video-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .video-card {
       position: relative;
     }
@@ -420,7 +442,7 @@
   <section class="hero">
     <div class="hero-content">
       <h1 class="publication-title">
-        <span class="gradient-text">Memory-V2V</span>: Augmenting Video-to-Video Diffusion Models with Memory
+        <span class="gradient-text">Memory-V2V</span>: Memory-Augmented Video-to-Video Diffusion for Consistent Multi-Turn Editing
       </h1>
 
       <div class="publication-authors">
@@ -642,7 +664,7 @@
       <p class="content-text">
         We compare <span class="gradient-text">Memory-V2V</span> against state-of-the-art video-to-video diffusion frameworks, including
         TrajectoryCrafter<a href="#ref-trajcrafter">[1]</a> and ReCamMaster<a href="#ref-recam">[2]</a> for video novel view synthesis, and
-        LucyEdit<a href="#ref-lucyedit">[3]</a> and the FIFO<a href="#ref-fifo">[4]</a>-enhanced variant of LucyEdit for text-guiided long-video editing.
+        TokenFlow<a href="#ref-tokenflow">[3]</a>, RAVE<a href="#ref-rave">[4]</a>, CCEdit<a href="#ref-ccedit">[5]</a>, LucyEdit<a href="#ref-lucyedit">[6]</a> and the FIFO<a href="#ref-fifo">[7]</a>-enhanced variant of LucyEdit for text-guiided long-video editing.
       </p>
 
       <!-- Multi-turn NVS Comparison -->
@@ -650,14 +672,34 @@
 
       <div class="video-container">
         <video class="video-full" controls autoplay muted loop playsinline>
-          <source src="static/videos/nvs_comp_1.mp4" type="video/mp4">
+          <source src="static/videos/nvs_comp_1_blur.mp4" type="video/mp4">
         </video>
+
+        <img class="image-full" src="static/images/nvs_comp_1_blur.png" alt="example image">
       </div>
+
+      <div style="height: 20px;"></div>
+      <hr>
+      <div style="height: 20px;"></div>
 
       <div class="video-container">
         <video class="video-full" controls autoplay muted loop playsinline>
-          <source src="static/videos/nvs_comp_2_blur.mp4" type="video/mp4">
+          <source src="static/videos/nvs_comp_2.mp4" type="video/mp4">
         </video>
+
+        <img class="image-full" src="static/images/nvs_comp_2.png" alt="example image">
+      </div>
+
+      <div style="height: 20px;"></div>
+      <hr>
+      <div style="height: 20px;"></div>
+
+      <div class="video-container">
+        <video class="video-full" controls autoplay muted loop playsinline>
+          <source src="static/videos/nvs_comp_3_blur.mp4" type="video/mp4">
+        </video>
+
+        <img class="image-full" src="static/images/nvs_comp_3_blur.png" alt="example image">
       </div>
 
       <div style="height: 20px;"></div>
@@ -667,25 +709,65 @@
       <!-- Long Video Editing Comparison -->
       <h3 class="section-subtitle">(b) Text-guided Long Video Editing</h3>
 
-      <!-- Comparison Row 1 -->
-      <div class="video-grid video-grid-4">
+        <!-- Comparison Row 1 -->
+        <div class="video-grid video-grid-4">
+
+        <!-- Row 1 -->
         <div class="video-card">
           <div class="video-label">Input video</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/input_1.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/input_1.mp4" type="video/mp4">
+          </video>
         </div>
+
+        <div class="video-card">
+          <div class="video-label">TokenFlow</div>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/tokenflow_1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="video-card">
+          <div class="video-label">RAVE</div>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/rave_1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="video-card">
+          <div class="video-label">CCEdit</div>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/ccedit_1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <!-- Row 2 (first column empty) -->
+        <div class="video-card empty-slot"></div>
+
         <div class="video-card">
           <div class="video-label">LucyEdit</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/lucyedit_1.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/lucyedit_1.mp4" type="video/mp4">
+          </video>
         </div>
+
         <div class="video-card">
           <div class="video-label">LucyEdit w/ FIFO</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/lucyedit_fifo_1.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/lucyedit_fifo_1.mp4" type="video/mp4">
+          </video>
         </div>
+
         <div class="video-card">
           <div class="video-label"><span class="gradient-text">Memory-V2V</span> (Ours)</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/ours_1.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/ours_1.mp4" type="video/mp4">
+          </video>
         </div>
+
       </div>
+
       <div class="prompt-display">
         <div class="prompt-label">Editing Instruction</div>
         <div class="prompt-text">"Change apple to orange"</div>
@@ -695,43 +777,43 @@
       <div class="video-grid video-grid-4">
         <div class="video-card">
           <div class="video-label">Input video</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/input_2.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/comparison/input_2.mp4" type="video/mp4"></video>
         </div>
-        <div class="video-card">
-          <div class="video-label">LucyEdit</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/lucyedit_2.mp4" type="video/mp4"></video>
-        </div>
-        <div class="video-card">
-          <div class="video-label">LucyEdit w/ FIFO</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/lucyedit_fifo_2.mp4" type="video/mp4"></video>
-        </div>
-        <div class="video-card">
-          <div class="video-label"><span class="gradient-text">Memory-V2V</span> (Ours)</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/ours_2.mp4" type="video/mp4"></video>
-        </div>
-      </div>
-      <div class="prompt-display">
-        <div class="prompt-label">Editing Instruction</div>
-        <div class="prompt-text">"Make the dark door white"</div>
-      </div>
 
-      <!-- Comparison Row 3 -->
-      <div class="video-grid video-grid-4">
         <div class="video-card">
-          <div class="video-label">Input video</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/input_3.mp4" type="video/mp4"></video>
+          <div class="video-label">TokenFlow</div>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/tokenflow_2.mp4" type="video/mp4">
+          </video>
         </div>
+
+        <div class="video-card">
+          <div class="video-label">RAVE</div>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/rave_2.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="video-card">
+          <div class="video-label">CCEdit</div>
+          <video controls autoplay muted loop playsinline>
+            <source src="static/videos/long_video/comparison/ccedit_2.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="video-card empty-slot"></div>
+
         <div class="video-card">
           <div class="video-label">LucyEdit</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/lucyedit_3.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/comparison/lucyedit_2.mp4" type="video/mp4"></video>
         </div>
         <div class="video-card">
           <div class="video-label">LucyEdit w/ FIFO</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/lucyedit_fifo_3.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/comparison/lucyedit_fifo_2.mp4" type="video/mp4"></video>
         </div>
         <div class="video-card">
           <div class="video-label"><span class="gradient-text">Memory-V2V</span> (Ours)</div>
-          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/ours_3.mp4" type="video/mp4"></video>
+          <video controls autoplay muted loop playsinline><source src="static/videos/long_video/comparison/ours_2.mp4" type="video/mp4"></video>
         </div>
       </div>
       <div class="prompt-display">
@@ -784,13 +866,61 @@
 
 
   <!-- Proof-of-Concept Section -->
-  <section>
+  <section class="section">
     <div class="container">
-      <h2 class="section-title">Proof-of-Concept Experiments: Ideal Context Encoder</h2>
+
+      <h2 class="section-title">Comparison Between Adaptive Token Discarding and Merging</h2>
+      
+      <p class="content-text">
+        Adaptive token merging preserves both semantic and motion information, whereas adaptive token discarding leads to the loss of important motion and structural details. Additionally, manipulating high-responsive tokens leads to a degradation of cross-consistency across generated outputs.
+      </p>
+
+      <div class="video-grid video-grid-3">
+          <div class="video-card">
+            <div class="video-label">Input video</div>
+            <video controls autoplay muted loop playsinline><source src="static/videos/ablation/input.mp4" type="video/mp4"></video>
+          </div>
+
+          <div class="video-card">
+            <div class="video-label">1<sup>st</sup> video novel view synthesis result</div>
+            <video controls autoplay muted loop playsinline>
+              <source src="static/videos/ablation/recam_1st.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="video-card">
+            <div class="video-label">Low-responsiveness token merging</div>
+            <video controls autoplay muted loop playsinline>
+              <source src="static/videos/ablation/low_merge.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="video-card">
+            <div class="video-label">High-responsiveness token merging</div>
+            <video controls autoplay muted loop playsinline><source src="static/videos/ablation/high_merge.mp4" type="video/mp4"></video>
+          </div>
+
+          <div class="video-card">
+            <div class="video-label">Low-responsiveness token discarding</div>
+            <video controls autoplay muted loop playsinline><source src="static/videos/ablation/low_drop.mp4" type="video/mp4"></video>
+          </div>
+          <div class="video-card">
+            <div class="video-label">High-responsiveness token discarding</div>
+            <video controls autoplay muted loop playsinline><source src="static/videos/ablation/high_drop.mp4" type="video/mp4"></video>
+          </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Proof-of-Concept Section -->
+  <section class="section-alt">
+    <div class="container">
+      <h2 class="section-title">(Supplementary Material) Proof-of-Concept Experiments: Ideal Context Encoder</h2>
       
       <p class="content-text">
         We investigate which type of memory encoder best preserves and transfers information by conditioning the model on the states from
-        CUT3R<a href="#ref-cut3r">[5]</a>, LVSM<a href="#ref-lvsm">[6]</a>, and a VAE.
+        CUT3R<a href="#ref-cut3r">[8]</a>, LVSM<a href="#ref-lvsm">[9]</a>, and a VAE.
         While CUT3R and LVSM fail to provide sufficiently informative guidance to the video diffusion model, 
         the VAE state effectively conveys the necessary information, leading to consistent generation of same region in different views.
       </p>
@@ -800,27 +930,6 @@
           <source src="static/videos/encoder_blur.mp4" type="video/mp4">
         </video>
       </div>
-    </div>
-  </section>
-
-
-  <!-- Token Comparison Section -->
-  <section class="section-alt">
-    <div class="container">
-      <h2 class="section-title">Comparison Between Adaptive Token Discarding and Merging</h2>
-      
-      <p class="content-text">
-        Adaptive token merging preserves both semantic and motion information, whereas adaptive token discarding leads to the loss of important motion and structural details.
-      </p>
-
-      <div class="caption-row">
-        <div>Input video</div>
-        <div>w/ Adaptive Token Discarding</div>
-        <div>w/ Adaptive Token Merging</div>
-      </div>
-      <video class="video-full" controls autoplay muted loop playsinline>
-        <source src="static/videos/atm_vs_discarding_blur.mp4" type="video/mp4">
-      </video>
     </div>
   </section>
 
